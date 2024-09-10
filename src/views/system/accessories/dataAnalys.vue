@@ -52,8 +52,6 @@
   </el-table-column>
 </el-table>
 
-
-      
       <pagination
         v-show="total>0"
         :total="total"
@@ -66,7 +64,6 @@
   
   <script setup name="Accessories">
   import { dataAnalys } from "@/api/system/accessories";
-  
   const { proxy } = getCurrentInstance();
   
   const accessoriesList = ref([]);
@@ -87,9 +84,9 @@ const queryParams = ref({
   type: 1 // 设置默认值为 1
 });
   /** 查询饰品信息列表 */
-  function getdataAnalys(queryParams) {
+  function getdataAnalys() {
     loading.value = true;
-    dataAnalys(queryParams).then(response => {
+    dataAnalys(queryParams.value).then(response => {
       accessoriesList.value = response.rows;
       total.value = response.total;
       loading.value = false;
@@ -128,9 +125,9 @@ const queryParams = ref({
   function handleQuery() {
   // 确保 queryParams.type 是数字
     queryParams.pageNum = 1;
-    getdataAnalys(queryParams);
+    getdataAnalys();
   
   }
-  getdataAnalys(queryParams);
+  getdataAnalys();
   </script>
   
